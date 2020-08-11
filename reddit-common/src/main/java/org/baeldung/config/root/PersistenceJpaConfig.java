@@ -1,5 +1,6 @@
 package org.baeldung.config.root;
 
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -40,10 +41,14 @@ public class PersistenceJpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
+        
         em.setPackagesToScan(new String[] { "org.baeldung.persistence.model" });
+//        System.out.println("-------------------->>>>>>>>>>> After package scanning");
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
+//        System.out.println("-------------------->>>>>>>>>>> After Vendor Adaptor");
         em.setJpaProperties(additionalProperties());
+//        System.out.println("-------------------->>>>>>>>>>> After Additional Properties");
         return em;
     }
 
@@ -54,6 +59,11 @@ public class PersistenceJpaConfig {
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
+//        System.out.println("-------------------->>>>>>>>>>>"+env.getProperty("jdbc.driverClassName"));
+//        System.out.println("-------------------->>>>>>>>>>>"+env.getProperty("jdbc.url"));
+//        System.out.println("-------------------->>>>>>>>>>>"+env.getProperty("jdbc.user"));
+//        System.out.println("-------------------->>>>>>>>>>>"+env.getProperty("jdbc.pass"));
+        
         return dataSource;
     }
 

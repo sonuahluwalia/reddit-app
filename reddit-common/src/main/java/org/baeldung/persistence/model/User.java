@@ -23,7 +23,11 @@ public class User implements IEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    public boolean isNeedCaptcha() {
+		return needCaptcha;
+	}
+
+	@Column(nullable = false, unique = true)
     private String username;
 
     private String accessToken;
